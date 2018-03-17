@@ -1,10 +1,11 @@
 #!/bin/bash -xve
 
-#required packages
-pip install catkin_pkg --user
-pip install empy --user
-pip install pyyaml --user
-pip install rospkg --user
+#required package
+pip install --user --upgrade -qq pip
+pip install --user catkin_pkg 
+pip install --user empy 
+pip install --user pyyaml
+pip install --user rospkg
 
 #ros install
 cd ..
