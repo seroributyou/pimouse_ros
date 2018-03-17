@@ -1,8 +1,5 @@
-language: python
+sudo: required
+dist: trusty
 
-python:
-  - 3.3
-  - 3.4
-
-install:
-  - pip install coveralls
+script:
+  - bash -xve ./test/travis_ros_install.bash
