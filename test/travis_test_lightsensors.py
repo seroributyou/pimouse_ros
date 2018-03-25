@@ -3,7 +3,7 @@
 import unittest, rostest
 import rosnode, rospy
 import time
-from raspimouse_ros_2.msg import LightSensorValues
+from pimouse_ros.msg import LightSensorValues
         
 class LightsensorTest(unittest.TestCase):
     def setUp(self):
@@ -29,7 +29,7 @@ class LightsensorTest(unittest.TestCase):
         self.assertIn('/lightsensors',nodes, "node does not exist")
 
     def test_get_value(self):
-        rospy.set_param('/lightsensors/frequency',10)    #センサの値取得の周期を10Hzに
+        rospy.set_param('lightsensors_freq',10)    #センサの値取得の周期を10Hzに
         time.sleep(2)                              #パラメータの反映を待つ
         with open("/dev/rtlightsensor0","w") as f: #ダミーの値をダミーのファイルに
             f.write("-1 0 123 4321\n")
@@ -40,7 +40,7 @@ class LightsensorTest(unittest.TestCase):
         self.check_values(4321,123,0,-1) 
 
     def test_change_parameter(self):
-        rospy.set_param('/lightsensors/frequency',1)    #センサの値取得の周期を1Hzに
+        rospy.set_param('lightsensors_freq',1)    #センサの値取得の周期を1Hzに
         time.sleep(2)                             #反映を待つ
         c_prev = self.count                       #callbackが呼ばれた回数を記録
         time.sleep(3) 
@@ -51,4 +51,8 @@ class LightsensorTest(unittest.TestCase):
 if __name__ == '__main__':
     time.sleep(3)
     rospy.init_node('travis_test_lightsensors')
-    rostest.rosrun('raspimouse_ros_2','travis_test_lightsensors',LightsensorTest)
+    rostest.rosrun('pimouse_ros','travis_test_lightsensors',LightsensorTest)
+
+# Copyright 2016 Ryuichi Ueda
+# Released under the BSD License.
+# To make line numbers be identical with the book, this statement is written here. Don't move it to the header.
